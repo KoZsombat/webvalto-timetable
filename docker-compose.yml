@@ -1,0 +1,24 @@
+services:
+  timetable:
+    build: .
+    image: timetable-discord:latest
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env
+    environment:
+      # A konténerben mindig a kötetre írunk, hogy újraindítás után is megmaradjon.
+      STATE_FILE: /data/state.json
+      ARCHIVE_FILE: /data/weeks.json
+      TIMEZONE: ${TIMEZONE:-Europe/Budapest}
+      POLL_SECONDS: ${POLL_SECONDS:-60}
+    volumes:
+      - timetable-data:/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  timetable-data:

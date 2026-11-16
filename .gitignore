@@ -1,0 +1,7 @@
+node_modules/
+.env
+.state.json
+*.log
+.DS_Store
+sample/
+.weeks.json

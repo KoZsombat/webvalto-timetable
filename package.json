@@ -1,0 +1,26 @@
+{
+  "name": "timetable-discord",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/bot.ts",
+    "sample": "bun run scripts/make-sample.ts",
+    "serve": "bun run scripts/serve-sample.ts",
+    "preview": "bun run src/cli.ts preview",
+    "dump": "bun run src/cli.ts dump",
+    "demo": "bun run scripts/demo.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "find-sheet": "bun run scripts/find-sheet.ts"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.1.1",
+    "discord.js": "^14.28.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.9.3"
+  }
+}
