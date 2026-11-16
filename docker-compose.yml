@@ -4,16 +4,30 @@ services:
     image: timetable-discord:latest
     restart: unless-stopped
     init: true
+
+    # Minden változó a .env-ből jön: az env_file injektálja, az environment
+    # pedig név szerint átadja ugyanazokat (a compose a .env-ből interpolál).
     env_file:
       - .env
     environment:
-      # A konténerben mindig a kötetre írunk, hogy újraindítás után is megmaradjon.
-      STATE_FILE: /data/state.json
-      ARCHIVE_FILE: /data/weeks.json
-      TIMEZONE: ${TIMEZONE:-Europe/Budapest}
+      DISCORD_TOKEN: ${DISCORD_TOKEN:-}
+      DISCORD_CHANNEL_ID: ${DISCORD_CHANNEL_ID:-}
+      GUILD_ID: ${GUILD_ID:-}
+      SOURCE_URL: ${SOURCE_URL:-}
       POLL_SECONDS: ${POLL_SECONDS:-60}
+      ROLLOVER_WEEKDAY: ${ROLLOVER_WEEKDAY:-szombat}
+      TIMEZONE: ${TIMEZONE:-Europe/Budapest}
+      STATE_FILE: ${STATE_FILE:-/data/state.json}
+      ARCHIVE_FILE: ${ARCHIVE_FILE:-/data/weeks.json}
+      BLOCK_LABELS: ${BLOCK_LABELS:-}
+      GRAPH_TENANT_ID: ${GRAPH_TENANT_ID:-}
+      GRAPH_CLIENT_ID: ${GRAPH_CLIENT_ID:-}
+      GRAPH_CLIENT_SECRET: ${GRAPH_CLIENT_SECRET:-}
+
     volumes:
+      # A relatív állapotfájlok (pl. .state.json) a /data munkakönyvtárba esnek.
       - timetable-data:/data
+
     logging:
       driver: json-file
       options:
